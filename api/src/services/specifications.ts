@@ -322,6 +322,12 @@ class OASSpecsService implements SpecificationSubService {
 		if (!components) components = {};
 
 		components.schemas = {};
+		if (openapi.components?.schemas?.Query !== null) {
+			components.schemas.Query = cloneDeep(openapi.components!.schemas!.Query);
+		}
+		if (openapi.components?.schemas !== null && 'x-metadata' in openapi.components!.schemas!) {
+			components.schemas['x-metadata'] = cloneDeep(openapi.components!.schemas['x-metadata']);
+		}
 
 		if (!tags) return;
 
